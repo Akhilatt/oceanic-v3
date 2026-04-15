@@ -4,12 +4,16 @@ import {
   DollarSign, Bell, LifeBuoy, User, LogOut, Ship, Globe, FileText,
   Star, Receipt, Users, Settings, ShieldCheck, X, TrendingUp
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import type { User as UserType } from '../../types'
 import apiFetch from '../../lib/api'
 
 interface Props { user: UserType; onLogout: () => void; unread: number; open: boolean; onClose: () => void }
 
-const NAV = [
+type NavItem = { path: string; label: string; icon: LucideIcon; badge?: boolean }
+type NavGroup = { group: string; items: NavItem[] }
+
+const NAV: NavGroup[] = [
   { group: 'Main', items: [
     { path: '/dashboard',     label: 'Dashboard',      icon: LayoutDashboard },
     { path: '/shipments',     label: 'Shipments',      icon: Package },
@@ -37,7 +41,7 @@ const NAV = [
   ]},
 ]
 
-const ADMIN_NAV = [
+const ADMIN_NAV: NavGroup[] = [
   { group: 'Admin', items: [
     { path: '/admin/users',      label: 'Users',       icon: Users },
     { path: '/admin/shipments',  label: 'All Shipments',icon: Package },
@@ -78,7 +82,7 @@ export default function Sidebar({ user, onLogout, unread, open, onClose }: Props
           {groups.map(g => (
             <div key={g.group}>
               <p className="nav-group-label">{g.group}</p>
-              {g.items.map(({ path, label, icon: Icon, badge }: { path: string; label: string; icon: React.ComponentType<{size?: number}>; badge?: boolean }) => (
+              {g.items.map(({ path, label, icon: Icon, badge }) => (
                 <button key={path} onClick={() => go(path)}
                   className={`nav-link w-full ${pathname === path || pathname.startsWith(path + '/') ? 'active' : ''}`}>
                   <Icon size={16} />

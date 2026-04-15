@@ -129,7 +129,7 @@ export default function Orders({ show }: { show: (m: string, t?: 'success'|'erro
           <div className="card">
             <h3 style={{ fontFamily: 'Clash Display,sans-serif', fontSize: 15, fontWeight: 600, marginBottom: 12 }}>Popular Ports</h3>
             {PORTS.slice(0, 8).map(p => (
-              <button key={p} onClick={() => setForm(f => ({ ...f, from_port: p }))} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '9px 0', borderBottom: '1px solid var(--border)', fontSize: 13, color: 'var(--muted)', background: 'none', border: 'none', borderBottom: '1px solid var(--border)', cursor: 'pointer', transition: 'color .15s' }}
+              <button key={p} onClick={() => setForm(f => ({ ...f, from_port: p }))} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '9px 0', borderBottom: '1px solid var(--border)', fontSize: 13, color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', transition: 'color .15s' }}
                 onMouseOver={e => (e.currentTarget.style.color = 'var(--text)')} onMouseOut={e => (e.currentTarget.style.color = 'var(--muted)')}>
                 📍 {p}
               </button>
